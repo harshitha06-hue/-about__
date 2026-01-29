@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Harshitha SK - Fashion Designer specializing in knitwear and contemporary apparel">
-    <title>Harshitha SK | Fashion Designer</title>
+    <title>Harshitha SK | Fashion Designer Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
+        /* CSS Variables - Black & Violet Aesthetic */
         :root {
-            --primary: #1a1a1a;
-            --secondary: #ffffff;
-            --accent: #8B7355;
-            --light-accent: #D4B996;
-            --text: #333333;
-            --light-text: #666666;
-            --border: #e8e3db;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #8a2be2;
+            --accent-light: #a855f7;
+            --accent-dark: #6b21a8;
+            --text: #e2e8f0;
+            --text-light: #94a3b8;
+            --border: #2d3748;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --glass: rgba(26, 26, 26, 0.7);
         }
 
         /* Reset & Base Styles */
@@ -31,17 +33,18 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text);
-            background-color: var(--secondary);
+            background: linear-gradient(135deg, var(--primary) 0%, #130724 100%);
             line-height: 1.7;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
         }
 
         h1, h2, h3, h4, .logo {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 600;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
         }
 
         img {
@@ -69,13 +72,14 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        @keyframes scaleIn {
-            to { opacity: 1; transform: scale(1); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        @keyframes borderGlow {
-            0%, 100% { border-color: var(--light-accent); }
-            50% { border-color: var(--accent); }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .animate-on-scroll {
@@ -93,12 +97,18 @@
         nav {
             position: fixed;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(10, 10, 10, 0.9);
             z-index: 1000;
             padding: 25px 0;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             transition: var(--transition);
-            border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav.scrolled {
+            padding: 18px 0;
+            background: rgba(10, 10, 10, 0.95);
         }
 
         .nav-container {
@@ -109,9 +119,13 @@
 
         .logo {
             font-size: clamp(1.8rem, 5vw, 2.2rem);
-            color: var(--primary);
+            color: var(--text);
             text-decoration: none;
             font-weight: 700;
+            background: linear-gradient(45deg, var(--text), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
@@ -121,7 +135,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text);
+            color: var(--text-light);
             font-weight: 500;
             font-size: 0.95rem;
             position: relative;
@@ -136,13 +150,13 @@
             bottom: 0;
             left: 0;
             width: 0;
-            height: 1px;
-            background: var(--accent);
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
             transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--text);
         }
 
         .nav-links a:hover::after {
@@ -154,8 +168,22 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #fefbf6 0%, #fff9f3 100%);
-            padding: 100px 0 50px;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 26, 26, 0.7) 100%);
+            padding: 120px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            animation: pulse 4s ease-in-out infinite;
         }
 
         .hero-content {
@@ -163,22 +191,29 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: clamp(40px, 6vw, 80px);
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
-            color: var(--primary);
+            color: var(--text);
             line-height: 1.1;
             margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--text), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .title {
             font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--accent);
+            color: var(--accent-light);
             margin-bottom: 30px;
             letter-spacing: 2px;
             position: relative;
-            padding-left: 20px;
+            padding-left: 25px;
+            font-weight: 500;
         }
 
         .title::before {
@@ -186,7 +221,7 @@
             position: absolute;
             left: 0;
             top: 50%;
-            width: 10px;
+            width: 15px;
             height: 2px;
             background: var(--accent);
         }
@@ -200,10 +235,10 @@
 
         /* Buttons */
         .btn {
-            padding: 15px 40px;
+            padding: 16px 42px;
             border: 2px solid var(--accent);
             background: transparent;
-            color: var(--accent);
+            color: var(--accent-light);
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition);
@@ -214,16 +249,40 @@
             overflow: hidden;
             display: inline-block;
             text-align: center;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
         }
 
         .btn-primary {
-            background: var(--accent);
+            background: linear-gradient(45deg, var(--accent), var(--accent-light));
             color: white;
+            border: none;
+        }
+
+        .btn-primary::before {
+            background: linear-gradient(45deg, var(--accent-dark), var(--accent));
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+            color: white;
         }
 
         /* Image Frames */
@@ -231,8 +290,21 @@
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(139, 115, 85, 0.1);
-            border: 1px solid var(--border);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            background: var(--secondary);
+        }
+
+        .designer-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(138, 43, 226, 0.1), transparent);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .designer-frame img {
@@ -240,6 +312,8 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
+            position: relative;
+            z-index: 0;
         }
 
         .designer-frame:hover img {
@@ -248,13 +322,14 @@
 
         /* Sections */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
+            position: relative;
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2rem, 5vw, 3.2rem);
             margin-bottom: 60px;
-            color: var(--primary);
+            color: var(--text);
             position: relative;
             display: inline-block;
         }
@@ -266,7 +341,12 @@
             left: 0;
             width: 80px;
             height: 3px;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transition: width 0.8s ease;
+        }
+
+        .section-title:hover::after {
+            width: 120px;
         }
 
         /* Grid Systems */
@@ -283,41 +363,226 @@
             gap: 40px;
         }
 
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 26, 26, 0.9) 100%);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .about-text strong {
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+
         /* Gallery */
+        .gallery-section {
+            background: var(--primary);
+        }
+
         .gallery-item {
             position: relative;
-            height: 400px;
+            height: 450px;
             border-radius: 15px;
             overflow: hidden;
             transition: var(--transition);
         }
 
+        .gallery-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(138, 43, 226, 0.2);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9) 0%, transparent 100%);
+            color: white;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .gallery-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .portfolio-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
         /* Process Steps */
+        .process {
+            background: var(--secondary);
+        }
+
         .process-step {
-            padding: 40px 30px;
-            background: white;
+            padding: 50px 35px;
+            background: var(--glass);
             border-radius: 15px;
             transition: var(--transition);
             text-align: center;
+            border: 1px solid rgba(138, 43, 226, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .process-step:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(139, 115, 85, 0.1);
+            box-shadow: 0 20px 40px rgba(138, 43, 226, 0.15);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .process-step h3 {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .process-step p {
+            color: var(--text-light);
         }
 
         /* Expertise Cards */
+        .expertise {
+            background: var(--primary);
+        }
+
         .expertise-card {
-            padding: 40px 30px;
-            background: white;
-            border: 1px solid var(--border);
+            padding: 50px 35px;
+            background: var(--glass);
+            border: 1px solid rgba(138, 43, 226, 0.1);
             border-radius: 15px;
             transition: var(--transition);
+            backdrop-filter: blur(10px);
         }
 
         .expertise-card:hover {
-            border-color: var(--accent);
+            border-color: rgba(138, 43, 226, 0.3);
             transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(138, 43, 226, 0.15);
+        }
+
+        .expertise-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .expertise-card ul {
+            list-style: none;
+        }
+
+        .expertise-card li {
+            margin-bottom: 12px;
+            color: var(--text-light);
+            padding-left: 25px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .expertise-card li:hover {
+            color: var(--accent-light);
+            transform: translateX(5px);
+        }
+
+        .expertise-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(26, 26, 26, 0.95) 100%);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/mCNr7J5n/Screenshot-2026-01-28-200557.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .contact::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(to left, rgba(26, 26, 26, 0.9) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-info, .contact-form {
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .contact-info:hover, .contact-form:hover {
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--text);
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: 30px;
         }
 
         /* Contact Form */
@@ -327,9 +592,9 @@
 
         input, textarea, select {
             width: 100%;
-            padding: 16px;
-            border: 1px solid var(--border);
-            background: white;
+            padding: 16px 20px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            background: rgba(10, 10, 10, 0.5);
             font-family: inherit;
             font-size: 0.95rem;
             color: var(--text);
@@ -337,31 +602,132 @@
             transition: var(--transition);
         }
 
+        input::placeholder, textarea::placeholder, select {
+            color: var(--text-light);
+        }
+
         input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+            background: rgba(10, 10, 10, 0.7);
+        }
+
+        /* Contact Details */
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .contact-details p {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .contact-details p:hover {
+            color: var(--text);
+            transform: translateX(5px);
+        }
+
+        .contact-details i {
+            color: var(--accent);
+            width: 20px;
+            transition: var(--transition);
+        }
+
+        .contact-details p:hover i {
+            color: var(--accent-light);
+            transform: scale(1.2);
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 50%;
+            transition: var(--transition);
+            background: rgba(10, 10, 10, 0.5);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
         }
 
         /* Footer */
         footer {
             background: var(--primary);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--text);
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--text), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            padding-top: 40px;
+            border-top: 1px solid rgba(138, 43, 226, 0.1);
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact::before, .contact::after {
+                width: 100%;
+                opacity: 0.2;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 0 20px;
+                padding: 0 25px;
             }
             
             section {
-                padding: 60px 0;
+                padding: 80px 0;
             }
 
             .hero {
-                padding-top: 120px;
+                padding-top: 140px;
             }
 
             .nav-links {
@@ -370,11 +736,13 @@
                 top: 80px;
                 left: 0;
                 width: 100%;
-                background: white;
+                background: rgba(10, 10, 10, 0.95);
                 flex-direction: column;
-                padding: 20px;
+                padding: 30px;
                 text-align: center;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(138, 43, 226, 0.2);
             }
 
             .nav-links.active {
@@ -386,8 +754,13 @@
                 background: none;
                 border: none;
                 font-size: 1.5rem;
-                color: var(--primary);
+                color: var(--text);
                 cursor: pointer;
+                transition: var(--transition);
+            }
+
+            .menu-toggle:hover {
+                color: var(--accent-light);
             }
 
             .cta-buttons {
@@ -399,28 +772,53 @@
             }
 
             .gallery-item {
+                height: 350px;
+            }
+
+            .contact-info, .contact-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .gallery-item {
                 height: 300px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
             }
         }
 
         /* Print Styles */
         @media print {
-            .nav-links, .cta-buttons, .social-links {
+            .nav-links, .cta-buttons, .social-links, .contact::before, .contact::after {
                 display: none !important;
             }
             
             .hero, section {
-                padding: 20px 0 !important;
+                padding: 40px 0 !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
             }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav id="mainNav">
         <div class="container nav-container">
-            <a href="#" class="logo">HARSHITHA SK</a>
+            <a href="#home" class="logo">HARSHITHA SK</a>
             <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
                 <a href="#portfolio">Portfolio</a>
                 <a href="#process">Process</a>
                 <a href="#expertise">Expertise</a>
@@ -438,8 +836,8 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>HARSHITHA SK</h1>
-                    <div class="title">Fashion Designer</div>
-                    <p>Creating distinctive collections through meticulous craftsmanship and refined contemporary aesthetics. Specializing in knitwear and apparel that balances innovative design with timeless elegance.</p>
+                    <div class="title">FASHION DESIGNER</div>
+                    <p style="color: var(--text-light);">Creating distinctive collections through meticulous craftsmanship and refined contemporary aesthetics. Specializing in knitwear and apparel that balances innovative design with timeless elegance.</p>
                     <div class="cta-buttons">
                         <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
                         <a href="#contact" class="btn">Get In Touch</a>
@@ -468,6 +866,7 @@
                     <h3>Where Creativity Meets Precision</h3>
                     <p>With specialized training from <strong>NIFT-TEA College of Knitwear Fashion</strong>, I approach fashion design as a harmonious blend of artistic vision and technical mastery.</p>
                     <p>My work is characterized by thoughtful material selection, innovative silhouettes, and attention to detail that elevates everyday apparel into wearable art.</p>
+                    <p>By merging traditional techniques with contemporary perspectives, I craft collections that resonate with modern sensibilities while maintaining timeless appeal.</p>
                 </div>
             </div>
         </div>
@@ -480,17 +879,29 @@
             <div class="grid-3">
                 <div class="gallery-item animate-on-scroll">
                     <div class="designer-frame">
-                        <img src="1000033401.jpg" alt="Soft Draping Collection" loading="lazy">
+                        <img src="1000033401.jpg" alt="Architectural Geometry Study">
+                        <div class="portfolio-overlay">
+                            <h3>Soft Draping</h3>
+                            <p>The wrap-style blouse creates a gentle V-neckline that flatters the form. Sheer layers add lightness and fluid movement.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
                     <div class="designer-frame">
-                        <img src="1000033403.jpg" alt="Urban Texture Detail" loading="lazy">
+                        <img src="1000033403.jpg" alt="Urban Texture Detail">
+                        <div class="portfolio-overlay">
+                            <h3>Soft Draping</h3>
+                            <p>The peplum detail introduces soft volume and visual interest. The overall design conveys effortless femininity and modern grace.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="gallery-item animate-on-scroll">
                     <div class="designer-frame">
-                        <img src="1000033402.jpg" alt="Layered Contrast Design" loading="lazy">
+                        <img src="1000033402.jpg" alt="Atmospheric Cityscape">
+                        <div class="portfolio-overlay">
+                            <h3>Layered Contrast</h3>
+                            <p>Ivory tones feel delicate and airy against bold red trousers. The peplum flare adds volume without heaviness.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -504,15 +915,15 @@
             <div class="grid-3">
                 <div class="process-step animate-on-scroll">
                     <h3>Research & Inspiration</h3>
-                    <p>Deep dive into cultural, historical, and contemporary references.</p>
+                    <p>Deep dive into cultural, historical, and contemporary references to inform initial concepts and thematic direction.</p>
                 </div>
                 <div class="process-step animate-on-scroll">
                     <h3>Concept Development</h3>
-                    <p>Thematic exploration through sketches and material selection.</p>
+                    <p>Thematic exploration through detailed sketches, comprehensive mood boards, and strategic material selection.</p>
                 </div>
                 <div class="process-step animate-on-scroll">
                     <h3>Technical Execution</h3>
-                    <p>Pattern making and construction with focused attention on fit.</p>
+                    <p>Pattern making, draping, and construction with focused attention on fit, proportion, and material integrity.</p>
                 </div>
             </div>
         </div>
@@ -526,27 +937,30 @@
                 <div class="expertise-card animate-on-scroll">
                     <h3>Design Development</h3>
                     <ul>
-                        <li>Concept Development</li>
-                        <li>Fashion Illustration</li>
-                        <li>Color Theory</li>
-                        <li>Print Design</li>
+                        <li>Concept Development & Mood Boards</li>
+                        <li>Fashion Illustration & Sketching</li>
+                        <li>Color Theory & Fabric Selection</li>
+                        <li>Print Design Development</li>
+                        <li>Garment Styling & Coordination</li>
                     </ul>
                 </div>
                 <div class="expertise-card animate-on-scroll">
                     <h3>Technical Skills</h3>
                     <ul>
-                        <li>Pattern Making</li>
+                        <li>Pattern Making & Draping</li>
                         <li>Garment Construction</li>
                         <li>Textile Manipulation</li>
-                        <li>Quality Control</li>
+                        <li>Fit & Proportion Analysis</li>
+                        <li>Quality Control & Finishing</li>
                     </ul>
                 </div>
                 <div class="expertise-card animate-on-scroll">
                     <h3>Specializations</h3>
                     <ul>
                         <li>Knitwear Design</li>
-                        <li>Surface Design</li>
+                        <li>Surface Design & Embellishment</li>
                         <li>Collection Development</li>
+                        <li>Fashion Show Production</li>
                         <li>Portfolio Presentation</li>
                     </ul>
                 </div>
@@ -558,16 +972,23 @@
     <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title">Let's Connect</h2>
-            <div class="grid-2">
+            <div class="contact-container">
                 <div class="contact-info">
                     <h3>Professional Inquiries</h3>
-                    <p>Available for design collaborations and creative direction projects.</p>
+                    <p>Available for design collaborations, collection development, and creative direction projects.</p>
                     <div class="contact-details">
                         <p><i class="fas fa-envelope"></i> harshitha2328@gmail.com</p>
                         <p><i class="fas fa-map-marker-alt"></i> Tamil Nadu, India</p>
                     </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    </div>
                 </div>
-                <form class="contact-form" id="contactForm">
+                
+                <form class="contact-form">
                     <div class="form-group">
                         <input type="text" placeholder="Your Name" required>
                     </div>
@@ -575,9 +996,18 @@
                         <input type="email" placeholder="Email Address" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Tell me about your project" rows="4" required></textarea>
+                        <select required>
+                            <option value="" disabled selected>Project Type</option>
+                            <option value="collaboration">Collaboration</option>
+                            <option value="collection">Collection Development</option>
+                            <option value="consultation">Design Consultation</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <div class="form-group">
+                        <textarea placeholder="Tell me about your project" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                 </form>
             </div>
         </div>
@@ -588,7 +1018,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">HARSHITHA SK</div>
-                <p>&copy; 2024 Harshitha SK. All Rights Reserved.</p>
+                <div style="color: var(--text-light); font-size: 0.9rem;">
+                    <p>Fashion Designer | Knitwear Specialist</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Harshitha SK. All Rights Reserved. <span style="margin-left: 20px; opacity: 0.7;">Design crafted with precision.</span>
             </div>
         </div>
     </footer>
@@ -597,6 +1032,7 @@
         // Mobile Navigation
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
+        const mainNav = document.getElementById('mainNav');
 
         menuToggle?.addEventListener('click', () => {
             navLinks?.classList.toggle('active');
@@ -636,13 +1072,17 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start',
+                        inline: 'nearest'
+                    });
                 }
             });
         });
 
         // Form submission
-        const contactForm = document.getElementById('contactForm');
+        const contactForm = document.querySelector('.contact-form');
         contactForm?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const button = contactForm.querySelector('button[type="submit"]');
@@ -655,25 +1095,30 @@
             await new Promise(resolve => setTimeout(resolve, 1500));
             
             button.textContent = 'Message Sent!';
-            button.style.background = '#2ecc71';
+            button.style.background = 'linear-gradient(45deg, #10b981, #34d399)';
             
             setTimeout(() => {
                 contactForm.reset();
                 button.textContent = originalText;
                 button.disabled = false;
                 button.style.background = '';
-            }, 2000);
+            }, 3000);
         });
 
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
             if (window.scrollY > 50) {
-                nav.style.padding = '15px 0';
-                nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                mainNav.classList.add('scrolled');
             } else {
-                nav.style.padding = '25px 0';
-                nav.style.boxShadow = 'none';
+                mainNav.classList.remove('scrolled');
+            }
+        });
+
+        // Update copyright year
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearSpan = document.querySelector('.copyright');
+            if (yearSpan) {
+                yearSpan.innerHTML = yearSpan.innerHTML.replace('2024', new Date().getFullYear());
             }
         });
     </script>
